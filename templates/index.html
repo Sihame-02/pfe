@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application pour Aveugles</title>
+    <style>
+        /* Réinitialisation et fond */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF3B0 0%, #FFFFFF 100%);
+        }
+
+        /* Conteneur principal */
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Titre */
+        .header {
+            margin-top: 5%;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            color: #8B4513;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+
+        /* Boutons en bas */
+        .buttons {
+            margin-top: auto; /* Pousse les boutons vers le bas */
+            display: flex;
+            gap: 80px; /* Espacement horizontal important */
+            margin-bottom: 15%;
+        }
+
+        .button {
+            padding: 20px 40px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bienvenue</h1>
+        </div>
+
+        <div class="buttons">
+            <a href="/camera" class="button">Caméra</a>
+            <a href="/settings" class="button">Paramètres</a>
+            <a href="/about" class="button">À propos</a>
+        </div>
+    </div>
+</body>
+</html>

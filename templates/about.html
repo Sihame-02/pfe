@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos</title>
+    <style>
+        /* Styles communs */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF3B0 0%, #FFFFFF 100%);
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #8B4513;
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 2.5em;
+        }
+
+        /* Contenu À propos */
+        .about-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            line-height: 1.6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            color: #5C4033;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+
+        /* Bouton Retour */
+        .back-button {
+            margin-top: auto;
+            margin-bottom: 5%;
+            padding: 15px 40px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .about-box {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin: 20px 0;
+            }
+
+            .about-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>À Propos de VisionAide</h1>
+
+        <div class="about-box">
+            <p class="about-text">
+                VisionAide est une application innovante développée pour améliorer l'autonomie des personnes
+                malvoyantes. Utilisant les dernières technologies de reconnaissance d'objets et de texte en
+                temps réel, notre solution transforme l'environnement visuel en informations auditives
+                instantanées.<br><br>
+
+                Fonctionnalités clés :<br>
+                • Reconnaissance vocale des textes imprimés<br>
+                • Identification des objets courants<br>
+                • Interface entièrement vocalisée<br>
+                • Personnalisation de la vitesse de lecture<br><br>
+
+                Notre équipe pluridisciplinaire combine expertise en intelligence artificielle, accessibilité
+                numérique et design inclusif pour créer une expérience utilisateur optimale. L'application
+                évolue constamment grâce aux retours de notre communauté d'utilisateurs.
+            </p>
+        </div>
+
+        <a href="/" class="back-button">Retour à l'accueil</a>
+    </div>
+</body>
+</html>
