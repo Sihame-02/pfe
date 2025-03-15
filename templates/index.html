@@ -3,76 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application pour Aveugles</title>
+    <title>Page d'Accueil - Futuriste</title>
     <style>
-        /* Réinitialisation et fond */
-        * {
+        body {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            color: #ffffff;
         }
-
-        body, html {
-            height: 100%;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #FFF3B0 0%, #FFFFFF 100%);
+        h1 {
+            font-size: 40px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
         }
-
-        /* Conteneur principal */
-        .container {
-            height: 100%;
+        .button-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
         }
-
-        /* Titre */
-        .header {
-            margin-top: 5%;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            color: #8B4513;
-            font-size: 2.5em;
-            margin-bottom: 50px;
-        }
-
-        /* Boutons en bas */
-        .buttons {
-            margin-top: auto; /* Pousse les boutons vers le bas */
-            display: flex;
-            gap: 80px; /* Espacement horizontal important */
-            margin-bottom: 15%;
-        }
-
         .button {
-            padding: 20px 40px;
-            background: #8B4513;
-            color: white;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: #ffffff;
+            padding: 15px 30px;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2em;
+            border-radius: 50px;
+            font-size: 18px;
             cursor: pointer;
-            text-transform: uppercase;
-            text-decoration: underline;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+        }
+        .button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Bienvenue</h1>
-        </div>
-
-        <div class="buttons">
-            <a href="/camera" class="button">Caméra</a>
-            <a href="/settings" class="button">Paramètres</a>
-            <a href="/about" class="button">À propos</a>
-        </div>
+    <h1>Bienvenue dans l'Application</h1>
+    <div class="button-container">
+       <a href="/camera" class="button">Caméra</a>
+        <a href="/settings" class="button">Paramètres</a>
+        <a href="/about" class="button">À propos</a>
+       <a href="/aide" class="button">Aide</a>
     </div>
 </body>
 </html>
