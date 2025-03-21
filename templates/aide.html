@@ -1,5 +1,68 @@
-<p>Bienvenue ! Voici comment utiliser l'application :</p>
-        <ul style="text-align: left;">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide - Futuriste</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+        h1, h2 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        .content {
+            width: 80%;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+        ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .faq {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .faq p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .back-to-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            color: #00c6ff;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        .back-to-home:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-to-home" onclick="window.location.href='/'">&#8592;</div>
+    <h1>Bienvenue !</h1>
+    <div class="content">
+        <p>Voici comment utiliser l'application :</p>
+        <ul>
             <li>📸 <strong>Détecter Texte</strong> : Activez la caméra et détectez du texte en direct.</li>
             <li>🔍 <strong>Détecter Objets</strong> : Utilisez la caméra pour identifier les objets autour de vous.</li>
             <li>📂 <strong>Télécharger un fichier</strong> : Chargez une image, vidéo ou document pour l'analyse.</li>
@@ -11,5 +74,6 @@
             <p><strong>❓ Quels types de fichiers sont pris en charge ?</strong><br> Les formats pris en charge sont JPG, PNG, PDF et MP4.</p>
             <p><strong>❓ Comment ajuster la vitesse de la voix ?</strong><br> Allez dans "Paramètres" et utilisez le curseur de vitesse.</p>
         </div>
-
-        <a href="/" class="button">Retour à l'accueil</a>
+    </div>
+</body>
+</html>

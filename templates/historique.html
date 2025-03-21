@@ -54,9 +54,25 @@
             border-radius: 10px;
             margin-top: 10px;
         }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .back-arrow:hover {
+            color: #00c6ff;
+        }
     </style>
 </head>
 <body>
+    <!-- Flèche de retour en haut à gauche -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
     <h1>Historique des Fichiers</h1>
     <div class="content">
         <p>Voici les fichiers récemment téléchargés :</p>
@@ -79,8 +95,6 @@
         <form action="{{ url_for('effacer_historique') }}" method="post">
             <button class="button" type="submit">Effacer l'historique</button>
         </form>
-
-        <a href="settings.html" class="button">Retour aux Paramètres</a>
     </div>
 </body>
 </html>

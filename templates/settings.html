@@ -68,9 +68,25 @@
         .button:active {
             transform: scale(0.95);
         }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .back-arrow:hover {
+            color: #00c6ff;
+        }
     </style>
 </head>
 <body>
+    <!-- Flèche de retour en haut -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
     <h1>Paramètres</h1>
     <div class="settings-container">
         <!-- Choix du langage -->
@@ -92,7 +108,6 @@
 
     <div class="button-container">
         <!-- Boutons fonctionnels -->
-        <a href="/" class="button">Retour à l'accueil</a>
         <a href="/historique" class="button">Historique</a>
 
         <a href="javascript:void(0);" class="button" onclick="shareApp()">Partager l'Application</a>
