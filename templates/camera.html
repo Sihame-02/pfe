@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caméra - Futuriste</title>
+    <title>See with me - Détection de texte et objets</title>
     <style>
         body {
             background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
@@ -20,6 +20,23 @@
             letter-spacing: 3px;
             font-weight: bold;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 255, 255, 0.8);
+            color: #0F2027;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.9);
+            transition: 0.3s;
+        }
+        .back-arrow:hover {
+            background: rgba(0, 255, 255, 1);
+            transform: scale(1.1);
         }
         .button-container {
             display: flex;
@@ -61,77 +78,139 @@
         video, img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Assure un affichage plein écran */
+            object-fit: cover;
             border-radius: 20px;
             position: absolute;
         }
         input[type="file"] {
             display: none;
         }
+        #remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 0, 0.8);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <h1>Caméra</h1>
+
+    <!-- Flèche de retour -->
+    <a href="/" class="back-arrow">&#8592;</a>
+
+    <h1>See with me - Détection de texte et objets</h1>
 
     <div class="camera-container">
-        <video id="video" autoplay></video>
-        <img id="uploadedImage" style="display: none;">
+        <video id="camera" autoplay></video>
+        <img id="uploaded-image" style="display: none;">
+        <button id="remove-image" onclick="removeImage()">✖</button>
     </div>
 
-    <input type="file" id="fileUpload" accept="image/,video/" onchange="uploadFile()">
+    <br>
 
+    <input type="file" id="image-upload" accept="image/*">
     <div class="button-container">
-        <a href="/" class="button">Retour à l'accueil</a>
-        <button class="button" onclick="window.location.href='/text-detection'">Détection de Texte</button>
-        <button class="button" onclick="window.location.href='/object-detection'">Détection d'Objets</button>
-        <button class="button" onclick="document.getElementById('fileUpload').click()">Télécharger le fichier</button>
+        <button class="button" onclick="captureText()">📸 Détecter texte</button>
+        <button class="button" onclick="captureObjects()">🛠 Détecter objets</button>
+        <button class="button" onclick="document.getElementById('image-upload').click()">Télécharger l'image</button>
     </div>
 
     <script>
-        const video = document.getElementById('video');
-        const uploadedImage = document.getElementById('uploadedImage');
+        const video = document.getElementById("camera");
+        const uploadedImage = document.getElementById("uploaded-image");
+        const removeImageBtn = document.getElementById("remove-image");
+        const imageUpload = document.getElementById("image-upload");
 
-        // Activation de la caméra par défaut
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 video.srcObject = stream;
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error("Erreur d'accès à la caméra:", error);
-            });
-
-        function uploadFile() {
-            const fileInput = document.getElementById('fileUpload');
-            const file = fileInput.files[0];
-
-            if (file) {
-                const fileURL = URL.createObjectURL(file);
-
-                // Si c'est une image, l'afficher
-                if (file.type.startsWith('image/')) {
-                    video.style.display = "none";
-                    uploadedImage.style.display = "block";
-                    uploadedImage.src = fileURL;
-                }
-
-                // Envoyer le fichier au serveur pour l'ajouter à l'historique
-                let formData = new FormData();
-                formData.append("file", file);
-
-                fetch("/upload", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Fichier téléchargé:", data);
-                    alert("Fichier envoyé et ajouté à l'historique !");
-                })
-                .catch(error => {
-                    console.error("Erreur lors de l'envoi du fichier :", error);
-                });
             }
         }
+        startCamera();
+
+        function captureText() {
+            if (uploadedImage.style.display === "none") {
+                const canvas = document.createElement("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = canvas.toDataURL("image/png");
+
+                sendImageToServer(imageData, '/detect_text');
+            } else {
+                const imageData = uploadedImage.src;
+                sendImageToServer(imageData, '/detect_text');
+            }
+        }
+
+        function captureObjects() {
+            if (uploadedImage.style.display === "none") {
+                const canvas = document.createElement("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = canvas.toDataURL("image/png");
+
+                sendImageToServer(imageData, '/detect_objects');
+            } else {
+                const imageData = uploadedImage.src;
+                sendImageToServer(imageData, '/detect_objects');
+            }
+        }
+
+        function sendImageToServer(imageData, endpoint) {
+            fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ image: imageData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (endpoint === '/detect_text') {
+                    alert("Texte détecté : " + data.text);
+                } else if (endpoint === '/detect_objects') {
+                    alert("Objets détectés : " + data.objects.join(", "));
+                }
+            })
+            .catch(error => console.error("Erreur:", error));
+        }
+
+        imageUpload.addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = "block";
+                    video.style.display = "none";
+                    removeImageBtn.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function removeImage() {
+            uploadedImage.style.display = "none";
+            video.style.display = "block";
+            removeImageBtn.style.display = "none";
+            imageUpload.value = "";
+        }
     </script>
+
 </body>
 </html>
